@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+
+	<property name="LOG_FILE_D"
+		value="${LOG_FILE:-${LOG_PATH:-D:/unia/paws-awd/logs/}paws-awd-ws.log}" />
+	<property name="LOG_FILE_E"
+		value="${LOG_FILE:-${LOG_PATH:-E:/unia/paws-awd/logs/}pawd-awd-ws.log}" />
+
+
+	<springProfile name="LOCALHOST">
+		<include
+			resource="org/springframework/boot/logging/logback/console-appender.xml" />
+		<appender name="ROLLING-FILE"
+			class="ch.qos.logback.core.rolling.RollingFileAppender">
+			<encoder>
+				<pattern>%-5level %d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %logger{36}.%M - %msg%n</pattern>
+			</encoder>
+			<file>${LOG_FILE_D}</file>
+			<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+				<fileNamePattern>${LOG_FILE_D}.%d{yyyy-MM-dd}.log</fileNamePattern>
+			</rollingPolicy>
+		</appender>
+
+		<root level="DEBUG">
+			<appender-ref ref="CONSOLE" />
+			<appender-ref ref="ROLLING-FILE" />
+		</root>
+	</springProfile>
+
+
+	<springProfile name="DEVELOPMENT">
+		<include
+			resource="org/springframework/boot/logging/logback/console-appender.xml" />
+		<appender name="ROLLING-FILE"
+			class="ch.qos.logback.core.rolling.RollingFileAppender">
+			<encoder>
+				<pattern>%-5level %d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %logger{36}.%M - %msg%n</pattern>
+			</encoder>
+			<file>${LOG_FILE_D}</file>
+			<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+				<fileNamePattern>${LOG_FILE_D}.%d{yyyy-MM-dd}.log</fileNamePattern>
+			</rollingPolicy>
+		</appender>
+
+		<root level="DEBUG">
+			<appender-ref ref="CONSOLE" />
+			<appender-ref ref="ROLLING-FILE" />
+		</root>
+	</springProfile>
+  
+    </configuration>
